@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HELP CENTER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+          body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: url('HELPCENTERRR.webp') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+        }
+
+        .FRONT{
+       display: flex;
+       align-items: center;
+    }
+
+    .vl {
+        border-left: 2px solid white;
+        height: 30px;
+        margin-left: 20px;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .SEARCH{ 
+        margin: 20px;
+        margin-left: 25px;
+        height: 15px;
+        width: 500px;
+        padding: 10px;
+        border: 2px solid #fff;
+        border-radius: 5px;
+        outline: none;
+        transition: box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .SEARCH:focus {
+        box-shadow: 0 8px 16px rgba(255, 255, 255, 0.5);
+    }
+
+    .MENU {
+        display: flex;
+        margin-left: auto;
+       margin-left: 42%;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        margin-left: 30px;
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: #f0db4f;
+    }
+
+    .ytm {
+        margin-left: 20px;
+        color: white;
+        font-size: 20px;
+        animation: slideIn 1.2s ease-in-out;
+    }
+
+    @keyframes slideIn {
+        from { margin-left: -100px; }
+        to { margin-left: 20px; }
+    }
+
+    .HOME {
+        margin-top: 10px;
+        background-color: transparent;
+        border: 2px solid white;
+        border-radius: 10px;
+        padding: 10px 30px;
+        color: white;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .HOME:hover {
+        background-color: #004e92;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .class {
+        margin: 40px;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .topbox, .SECBOX {
+        height: 150px;
+        width: 600px;
+        padding: 20px;
+        border: 2px solid white;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .topbox:hover, .SECBOX:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+    }
+    </STYLE>
+    </head>
+    <body>
+        <div class="FRONT">
+            <img id="LOGO" src="8f34258a-9b7f-4619-bfde-b2c85d94604e.jpg" height="65px" width="130px">
+            <div class="vl"></div>
+            <div class="ytm"><h4>YOUR STOCK MANAGER</h4></div>
+            <input type="text" placeholder="Search for problems" class="SEARCH" oninput="searchProducts()">
+            <div class="vl"></div> 
+            <a href="STOCKHOME.HTML" class="LENGTH" style="color: white;">HOME</a>
+            <a href="purchase.html" class="LENGTH" style="color: white;">PURCHASES</a>
+            <a href="sales.html" class="LENGTH" style="color:white">SALES</a>
+        </div>
+        </div>
+        <hr>
+
+    </body>
+</html>

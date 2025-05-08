@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PURCHASE</title>
+</head>
+<style>
+    body, html {
+       margin: 0;
+       padding: 0;
+       width: 100%;
+       height: 100%;
+       background-size: cover;
+       font-family: Arial, sans-serif;
+       background: url(Screenshot\ 2024-10-29\ 191605.png) no-repeat center center fixed;
+    }
+    .FRONT{
+       display: flex;
+    }
+    .vl {
+        border-left: 1px solid white;
+        height: 20px;
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+    .SEARCH { 
+        margin: 20px;
+        margin-left: 25px;
+        height: 15px;
+        width: 500px;
+        padding: 10px;
+        border: 2px solid #fff;
+        border-radius: 5px;
+        outline: none;
+        transition: box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    .SEARCH:focus {
+        box-shadow: 0 8px 16px rgba(255, 255, 255, 0.5);
+    }
+    .MENU {
+        display: flex;
+        margin-left: 31%;   
+    }
+    a, u {
+        text-decoration: none;
+    }
+    .LENGTH {
+        margin-left: 25px;
+        margin-top: 25px;
+    }
+    .ytm {
+        margin-left: 10px;
+        color: WHITE;
+    }
+    .DASHBOARDTXT {
+        margin-top: 10px;
+        margin-left: 20%;
+    }
+    .total-purchase, .add-product {
+        margin: 30px auto;
+        padding: 20px;
+        width: 400px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        color: white;
+    }
+    .total-sales h1 {
+        font-size: 24px;
+        margin: 0;
+    }
+    .add-product input {
+        margin: 10px 0;
+        padding: 10px;
+        width: calc(100% - 22px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+    }
+    .add-product button {
+        margin-top: 10px;
+        padding: 10px;
+        width: 100%;
+        background-color: skyblue;
+        color: black;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .add-product button:hover {
+        background-color: white;
+    }
+    .product-header {
+        text-align: center;
+        margin-top: 40px;
+        color: white;
+    }
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        color: white;
+    }
+    table, th, td {
+        border: 1px solid white;
+    }
+    th, td {
+        padding: 10px;
+        text-align: center;
+    }
+    th {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+    td {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+    .save-button {
+        width: fit-content;
+        margin: 20px auto;
+        padding: 15px;
+        background-color: BLACK;
+        color: white;
+        text-align: center;
+        font-size: 20px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        margin-left: 47%;
+    }
+    .save-button:hover {
+        background-color: transparent;
+    }
+    .date-input {
+        margin-top: 26px;
+        margin-left: 20px;
+        height: max-content;
+        background: transparent;
+        color: white;
+        border: 1px solid white;
+        padding: 5px;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+</style>
+<body>  
+    <div class="FRONT">
+        <img id="LOGO" src="8f34258a-9b7f-4619-bfde-b2c85d94604e.jpg" height="65px" width="130px">
+        <div class="vl"></div>
+        <div class="ytm"><h4>YOUR STOCK MANAGER</h4></div>
+        <input type="text" placeholder="Search Sold Products" class="SEARCH" oninput="searchProducts()">
+        <div class="vl"></div> 
+        <a href="STOCKHOME.HTML" class="LENGTH" style="color: white;">HOME</a>
+        <a href="purchase.html" class="LENGTH" style="color: white;">SALES</a>
+        <a href="helpcenter.html" class="LENGTH" style="color:white">HELP CENTRE</a>
+        <!-- Dynamic Date Picker -->
+        <input type="date" id="datePicker" class="date-input" style="color: white; margin-top:25PX;" onchange="updateDate()">
+    </div>
+    <hr>
+    <div class="total-purchase">
+        <h1>TOTAL PURCHASE: Rs. <span id="total-sales">0</span></h1>
+    </div>
+
+    <div class="add-product">
+        <h2>ADD PRODUCT DETAIL</h2>
+        <input type="text" id="product-name" placeholder="Product Name" onkeydown="handleEnter(event)">
+        <input type="number" id="quantity" placeholder="Quantity" onkeydown="handleEnter(event)">
+        <input type="number" id="sale-amount" placeholder="Price (Rs.)" onkeydown="handleEnter(event)">
+        <button onclick="addSale()">Add Sale</button>
+    </div>
+    
+    <div class="product-header">
+        <h2>PURCHASED ITEMS:</h2>
+    </div>
+
+    <!-- Product Table -->
+    <table id="product-table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price (Rs.)</th>
+                <th>Date of Purchase</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dynamic entries will appear here -->
+        </tbody>
+    </table>
+
+    <!-- Save Button -->
+    <button class="save-button" onclick="savePurchases()">Save</button>
+
+    <script>
+        let totalPurchase = 0;
+        let purchases = [];
+        let selectedDate = new Date().toISOString().split('T')[0];  // Default to today’s date
+
+        document.getElementById('datePicker').value = selectedDate;  // Set default date picker value
+
+        function addSale() {
+            const productName = document.getElementById('product-name').value;
+            const quantity = document.getElementById('quantity').value;
+            const saleAmount = document.getElementById('sale-amount').value;
+            const date = selectedDate;  // Use selected date instead of current date
+
+            if (productName && quantity && saleAmount) {
+                // Calculate the total cost for the product
+                const totalProductPrice = quantity * saleAmount;
+
+                // Update total purchase
+                totalPurchase += totalProductPrice;
+                document.getElementById('total-sales').innerText = totalPurchase;
+
+                // Add new entry to purchases
+                purchases.push({ productName, quantity, saleAmount, date });
+
+                // Update the displayed purchases based on the selected date
+                updateProductTable();
+
+                // Clear inputs after adding
+                document.getElementById('product-name').value = '';
+                document.getElementById('quantity').value = '';
+                document.getElementById('sale-amount').value = '';
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                addSale();  // Trigger the addSale function when the Enter key is pressed
+            }
+        }
+
+        function updateDate() {
+            selectedDate = document.getElementById('datePicker').value;
+            updateProductTable(); // Update the product table based on the new date
+        }
+
+        function updateProductTable() {
+            const tableBody = document.getElementById('product-table').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = ''; // Clear existing rows
+
+            totalPurchase = 0; // Reset total purchase for the new date
+
+            // Filter purchases based on the selected date
+            purchases.forEach(purchase => {
+                if (purchase.date === selectedDate) {
+                    const newRow = tableBody.insertRow();
+                    newRow.innerHTML = `
+                        <td>${purchase.productName}</td>
+                        <td>${purchase.quantity}</td>
+                        <td>${purchase.saleAmount}</td>
+                        <td>${purchase.date}</td>
+                    `;
+                    // Update total purchase
+                    totalPurchase += purchase.quantity * purchase.saleAmount;
+                }
+            });
+
+            document.getElementById('total-sales').innerText = totalPurchase; // Update total displayed
+        }
+
+        function savePurchases() {
+            if (purchases.length > 0) {
+                alert(`Total Purchase for the day is Rs. ${totalPurchase}. Data has been saved.`);
+                console.log('Saved Purchase List:', purchases);  // Optional: Log the saved data for further use
+            } else {
+                alert('No purchases to save.');
+            }
+        }
+    </script>
+
+</body>
+</html>

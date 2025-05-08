@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+          body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: url('SALESMAIN.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+        }
+
+        .FRONT{
+       display: flex;
+       align-items: center;
+    }
+
+    .vl {
+        border-left: 2px solid white;
+        height: 30px;
+        margin-left: 20px;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .SEARCH{ 
+        margin: 20px;
+        margin-left: 25px;
+        height: 15px;
+        width: 500px;
+        padding: 10px;
+        border: 2px solid #fff;
+        border-radius: 5px;
+        outline: none;
+        transition: box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .SEARCH:focus {
+        box-shadow: 0 8px 16px rgba(255, 255, 255, 0.5);
+    }
+
+    .MENU {
+        display: flex;
+        margin-left: auto;
+       margin-left: 42%;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        margin-left: 30px;
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: #f0db4f;
+    }
+
+    .ytm {
+        margin-left: 20px;
+        color: white;
+        font-size: 20px;
+        animation: slideIn 1.2s ease-in-out;
+    }
+
+    @keyframes slideIn {
+        from { margin-left: -100px; }
+        to { margin-left: 20px; }
+    }
+
+    .HOME {
+        margin-top: 10px;
+        background-color: transparent;
+        border: 2px solid white;
+        border-radius: 10px;
+        padding: 10px 30px;
+        color: white;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .HOME:hover {
+        background-color: #004e92;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .class {
+        margin: 40px;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .topbox, .SECBOX {
+        height: 150px;
+        width: 600px;
+        padding: 20px;
+        border: 2px solid white;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+        
+        .total-sales, .add-product {
+            margin: 30px auto;
+            padding: 20px;
+            width: 400px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .total-sales h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .add-product input {
+            margin: 10px 0;
+            padding: 10px;
+            width: calc(100% - 22px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .add-product button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            background-color: skyblue;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-product button:hover {
+            background-color: white;
+        }
+
+        .product-list {
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .product-item {
+            width: 230px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2); /* Lighter background for product items */
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative; /* For pseudo-element positioning */
+        }
+
+        .product-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3); /* Dark overlay */
+            opacity: 0; /* Start hidden */
+            transition: opacity 0.3s;
+            z-index: 1; /* Behind text */
+        }
+
+        .product-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+        }
+
+        .product-item:hover:before {
+            opacity: 1; /* Show overlay on hover */
+        }
+
+        .product-item h3 {
+            margin: 5px 0;
+            font-size: 18px;
+            z-index: 2; /* On top of overlay */
+        }
+
+        .product-item p {
+            margin: 5px 0;
+            z-index: 2; /* On top of overlay */
+        }
+        
+        /* New styles for the date dropdown */
+        .date-dropdown {
+            margin-left: 20px; /* Distance from the Help Centre link */
+            margin-top: 15px; /* Vertical space above the dropdown */
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+            padding: 5px;
+            height: 35px; /* Reduced height */
+        }
+    </style>
+</head>
+<body>
+    <div class="FRONT">
+        <img id="LOGO" src="8f34258a-9b7f-4619-bfde-b2c85d94604e.jpg" height="65px" width="130px">
+        <div class="vl"></div>
+        <div class="ytm"><h4>YOUR STOCK MANAGER</h4></div>
+        <input type="text" placeholder="Search Sold Products" class="SEARCH" oninput="searchProducts()">
+        <div class="vl"></div> 
+        <a href="STOCKHOME.HTML" class="LENGTH" style="color: white;">HOME</a>
+        <a href="purchase.html" class="LENGTH" style="color: white;">PURCHASES</a>
+        <a href="helpcenter.html" class="LENGTH" style="color:white">HELP CENTRE</a>
+        <select class="date-dropdown" onchange="changeDate(this)">
+            <option value="2024-10-28">Today: 2024-10-28</option>
+            <option value="2024-10-27">2024-10-27</option>
+            <option value="2024-10-26">2024-10-26</option>
+        </select>
+    </div>
+    </div>
+    <hr>
+    <div class="total-sales">
+        <h1>TOTAL SALES: Rs. <span id="total-sales">0</span></h1>
+    </div>
+
+    <div class="add-product">
+        <h2>ADD PRODUCT DETAIL</h2>
+        <input type="text" id="product-name" placeholder="Product Name">
+        <input type="number" id="sale-amount" placeholder="Sale Amount (Rs.)">
+        <button onclick="addSale()">Add Sale</button>
+    </div>
+    
+    <div class="product-header">
+        <h2>PRODUCT SOLD:</h2>
+    </div>
+    
+    <div class="product-list" id="product-list">
+        <!-- Product items will be added here -->
+    </div>
+
+    <canvas id="salesChart" width="600" height="400"></canvas> <!-- Chart Canvas -->
+
+    <script>
+        let totalSales = 0;
+        const products = [];
+        const salesData = []; // To store sales amounts
+        const timeLabels = []; // To store sale times for the X-axis
+
+        // Initialize Chart.js
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: timeLabels,
+                datasets: [{
+                    label: 'Total Sales (Rs.)',
+                    data: salesData,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time',
+                            color: 'white'
+                        },
+                        grid: {
+                    color: 'white' // Change X axis grid lines to white
+                },
+                ticks: {
+                    color: 'white' // Change X axis ticks color to white
+                }
+            },
+                    },
+                    
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Sales (Rs.)',
+                            color: 'white'
+                        },
+                        grid: {
+                    color: 'white' // Change X axis grid lines to white
+                },
+                ticks: {
+                    color: 'white' // Change X axis ticks color to white
+                }
+            },
+                        
+                    }
+                }
+            
+        );
+
+        function addSale() {
+            const productName = document.getElementById('product-name').value;
+            const saleAmount = parseFloat(document.getElementById('sale-amount').value);
+            
+            if (!productName || isNaN(saleAmount)) {
+                alert('Please fill all fields correctly.');
+                return;
+            }
+
+            totalSales += saleAmount;
+            document.getElementById('total-sales').innerText = totalSales.toFixed(2);
+
+            const currentTime = new Date().toLocaleString();
+            const productList = document.getElementById('product-list');
+            const productItem = document.createElement('div');
+            productItem.className = 'product-item';
+            productItem.innerHTML = `<h3>Product: ${productName}</h3><p>Sale: Rs. ${saleAmount.toFixed(2)}</p><p>Time: ${currentTime}</p>`;
+            productList.appendChild(productItem);
+
+            products.push({ name: productName, amount: saleAmount, time: currentTime });
+
+            // Update the chart data
+            salesData.push(totalSales);
+            timeLabels.push(currentTime);
+            salesChart.update();
+
+            document.getElementById('product-name').value = '';
+            document.getElementById('sale-amount').value = '';
+        }
+
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                addSale();
+            }
+        });
+
+        function searchProducts() {
+            const query = document.querySelector('.SEARCH').value.toLowerCase();
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+            
+            products.forEach(product => {
+                if (product.name.toLowerCase().includes(query)) {
+                    const productItem = document.createElement('div');
+                    productItem.className = 'product-item';
+                    productItem.innerHTML = `<h3>Product: ${product.name}</h3><p>Sale: Rs. ${product.amount.toFixed(2)}</p><p>Time: ${product.time}</p>`;
+                    productList.appendChild(productItem);
+                }
+            });
+        }
+
+        function changeDate(select) {
+            const selectedDate = select.value;
+            alert('Selected date: ' + selectedDate);
+        }
+    </script>
+</body>
+</html>

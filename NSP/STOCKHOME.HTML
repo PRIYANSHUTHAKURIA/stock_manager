@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
+</head>
+<style>
+     body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        background: url(69fe4172-c4ca-4d3b-a149-7428c69c13edHOME.webp) no-repeat center center fixed;
+    }
+
+    .FRONT{
+       display: flex;
+       align-items: center;
+    }
+
+    .vl {
+        border-left: 2px solid white;
+        height: 30px;
+        margin-left: 20px;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .SEARCH{ 
+        margin: 20px;
+        margin-left: 25px;
+        height: 15px;
+        width: 500px;
+        padding: 10px;
+        border: 2px solid #fff;
+        border-radius: 5px;
+        outline: none;
+        transition: box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .SEARCH:focus {
+        box-shadow: 0 8px 16px rgba(255, 255, 255, 0.5);
+    }
+
+    .MENU {
+        display: flex;
+        margin-left: auto;
+        margin-left: 42%;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        margin-left: 30px;
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: #f0db4f;
+    }
+
+    .ytm {
+        margin-left: 20px;
+        color: white;
+        font-size: 20px;
+        animation: slideIn 1.2s ease-in-out;
+    }
+
+    @keyframes slideIn {
+        from { margin-left: -100px; }
+        to { margin-left: 20px; }
+    }
+
+    .HOME {
+        margin-top: 10px;
+        background-color: transparent;
+        border: 2px solid white;
+        border-radius: 10px;
+        padding: 10px 30px;
+        color: white;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .HOME:hover {
+        background-color: #004e92;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .class {
+        margin: 40px;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .topbox, .SECBOX {
+        height: 150px;
+        width: 600px;
+        padding: 20px;
+        border: 2px solid white;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .topbox:hover, .SECBOX:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+    }
+
+    .fy-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 30px 0;
+    }
+
+    .fy-label {
+        font-size: 18px;
+        color: white;
+        margin-right: 15px;
+    }
+
+    .fy-select, .date-picker {
+        padding: 8px;
+        border: 2px solid white;
+        border-radius: 5px;
+        background-color: transparent;
+        color: white;
+        margin-right: 15px;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .fy-select:hover, .date-picker:hover {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    }
+
+    /* Account Icon Dropdown Styles */
+    .account-dropdown {
+        position: relative;
+        display: inline-block;
+        margin-left: 30px;
+    }
+
+    .account-dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        border-radius: 5px;
+        text-align: left;
+    }
+
+    .account-dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+
+    .account-dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+    .account-dropdown:hover .account-dropdown-content {
+        display: block;
+    }
+
+    .account-dropdown:hover .account-icon {
+        color: #f0db4f;
+    }
+
+    .account-icon {
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    /* Chart Container */
+    .chart-container {
+        width: 80%;
+        margin: auto;
+    }
+</style>
+<body>
+    <div class="FRONT">
+        <img id="LOGO" src="8f34258a-9b7f-4619-bfde-b2c85d94604e.jpg" height="65PX" width="130PX">
+        <div class="vl"></div>
+        <div class="ytm"><h4>YOUR STOCK MANAGER</h4></div>
+        <input type="text" placeholder="SEARCH YOUR STOCKS......." class="SEARCH">
+        <div class="vl"></div> 
+        <a href="sales.html" class="LENGTH">SALES</a>
+        <a href="purchase.html" class="LENGTH">PURCHASES</a>
+        <a href="helpcenter.html" class="LENGTH">HELP CENTRE</a> 
+
+        <!-- Account Icon Dropdown -->
+        <div class="account-dropdown">
+            <i class="fa fa-user-circle account-icon"></i>
+            <div class="account-dropdown-content">
+                <a href="#">Account Info</a>
+                <a href="#">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="MENU">
+        <h1 class="HOME">HOME</h1>
+    </div>
+
+    <div class="fy-section">
+        <label class="fy-label">Select Fiscal Year:</label>
+        <select id="fy-select" class="fy-select" onchange="updateFY()">
+            <option value="FY-2020">FY-2020</option>
+            <option value="FY-2021">FY-2021</option>
+            <option value="FY-2022">FY-2022</option>
+            <option value="FY-2023">FY-2023</option>
+            <option value="FY-2024" selected>FY-2024</option>
+        </select>
+
+        <label class="fy-label">Start Date:</label>
+        <input type="date" id="start-date" class="date-picker" onchange="updateDateRange()">
+
+        <label class="fy-label">End Date:</label>
+        <input type="date" id="end-date" class="date-picker" onchange="updateDateRange()">
+    </div>
+
+    <div class="class">
+        <div class="topbox">
+            <h1 class="SALE">TOTAL SALES:</h1>
+            <h6 id="sales-period">FY-2024</h6>
+        </div>
+
+        <div class="SECBOX">
+            <h1 class="SALE">TOTAL PURCHASE:</h1>
+            <h6 id="purchase-period">FY-2024</h6>
+        </div>
+    </div>
+
+    <!-- Chart Container -->
+    <div class="chart-container">
+        <canvas id="salesPurchasesChart"></canvas>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('salesPurchasesChart').getContext('2d');
+        let salesPurchasesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Total Sales', 'Total Purchases'],
+                datasets: [{
+                    label: 'Amount',
+                    data: [0, 0], // Initial data
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.5)', // Blue
+                        'rgba(255, 99, 132, 0.5)'  // Red
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Amount'
+                        }
+                    }
+                }
+            }
+        });
+
+        function updateFY() {
+            const selectedFY = document.getElementById('fy-select').value;
+            document.getElementById('sales-period').textContent = selectedFY;
+            document.getElementById('purchase-period').textContent = selectedFY;
+
+            // Update chart data (you can replace these values with actual data)
+            salesPurchasesChart.data.datasets[0].data = [Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000)];
+            salesPurchasesChart.update();
+        }
+
+        function updateDateRange() {
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+
+            if (startDate && endDate) {
+                document.getElementById('sales-period').textContent = startDate + ' to ' + endDate;
+                document.getElementById('purchase-period').textContent = startDate + ' to ' + endDate;
+
+                // Update chart data (you can replace these values with actual data)
+                salesPurchasesChart.data.datasets[0].data = [Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000)];
+                salesPurchasesChart.update();
+            }
+        }
+    </script>
+</body>
+</html>
